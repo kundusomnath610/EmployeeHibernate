@@ -1,5 +1,6 @@
 package empCompany;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -8,9 +9,16 @@ import jakarta.persistence.ManyToOne;
 public class Employee {
 
     @Id
+    @Column(name = "Employee_id")
     int eId;
+
+    @Column(unique = true, name = "Name")
     String eName;
+
+    @Column(name = "Dept_Name")
     String eDept;
+
+    @Column(name = "Salary")
     int eSalary;
 
     @ManyToOne

@@ -2,6 +2,7 @@ package empCompany;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -9,8 +10,10 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Company {
 
+        @Column(name = "Company_id")
         @Id
         int cId;
+
         @OneToMany
         List<Employee> empList;
         public Company() {
