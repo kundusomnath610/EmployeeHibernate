@@ -1,17 +1,37 @@
-package org.example;
+package empCompany;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class RunApp {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Configuration cfg = new Configuration().configure();
+        SessionFactory factory = cfg.buildSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = sess.beginTransaction();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Company c = new Company();
+
+        Employee e1 = new Employee(303, "Priya", "dev", 32000, c);
+        Employee e2 = new Employee(403, "Anjali", "Testing", 34000, c);
+
+        List<Employee> empList = new ArrayList<Employee>();
+        empList.add(e1);
+        empList.add(e2);
+
+        c.setcId(2);
+        c.setEmpList(empList);
+
+        sess.persist(c);
+        sess.persist(e1);
+        sess.persist(e2);
+
+        tx.commit();
     }
 }
